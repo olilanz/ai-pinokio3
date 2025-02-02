@@ -28,9 +28,9 @@ export DISPLAY=:99
 echo "✅ Xvfb is running (DISPLAY=:99)."
 
 # Start Pinokio 
-# (the switches for GPU and SHM are needed to the electron desktiopp app in the container, as the vitual display is not a real GPU)
+# (the switches for GPU and SHM are needed to the electron desktop app in the container, as the vitual display is not a real GPU)
 echo "🚀 Starting Pinokio (container port 42000)..."
-pinokio serve --port 42000 --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage
+pinokio serve --port 42000 --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --headless
 
 # If Pinokio exits, print a message
 echo "❌ Pinokio has stopped running. Check logs for details."
