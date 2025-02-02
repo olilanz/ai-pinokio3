@@ -31,27 +31,19 @@ ENV PINOKIO_PORT=7860
 #ENV ELECTRON_ENABLE_SANDBOX=0
 ENV DISPLAY=:99
 
-# Set up the working directory
-WORKDIR /app
-
 # Download and install the Pinokio .deb package
-RUN wget -O pinokio.deb https://github.com/pinokiocomputer/pinokio/releases/download/3.6.0/Pinokio_3.6.0_amd64.deb
-RUN apt install -y ./pinokio.deb && rm pinokio.deb
+RUN wget -O /tmp/pinokio.deb https://github.com/pinokiocomputer/pinokio/releases/download/3.6.0/Pinokio_3.6.0_amd64.deb
+RUN apt install -y /tmp/pinokio.deb && rm /tmp/pinokio.deb
 
 # Expose VNC port
 EXPOSE 5900
 EXPOSE 7860
 EXPOSE 42000
 
-COPY config.json /root/.config/pinokio/config.json
-
-# Copy the startup script to the container
+RUN mkdir /app
+WORKDIR /app
+COPY config.json config.json
 COPY startup.sh startup.sh
-
-# Make the script executable
 RUN chmod +x startup.sh
 
-# Start xvfb, x11vnc, and then Pinokio
-#CMD xvfb-run --server-args="-screen 0 1280x1024x24" x11vnc -display :99 -forever -passwd yourpassword & pinokio serve --host 0.0.0.0 --port 7860 --no-sandbox
-#CMD ["sh", "-c", "xvfb-run --server-args='-screen 0 1280x1024x24' & x11vnc -display :99 -forever -passwd yourpassword & pinokio serve --host 0.0.0.0 --port 7860 --no-sandbox"]
 CMD ["./startup.sh"]
