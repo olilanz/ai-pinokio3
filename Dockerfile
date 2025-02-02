@@ -24,7 +24,7 @@ RUN apt install -y \
 RUN apt install -y \
     xvfb x11vnc tigervnc-standalone-server
 RUN apt install -y \
-    dbus
+    dbus dbus-x11
 RUN rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
