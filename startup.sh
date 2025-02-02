@@ -27,13 +27,6 @@ sleep 2
 export DISPLAY=:99
 echo "✅ Xvfb is running (DISPLAY=:99)."
 
-# Start VNC server as alternative for web interface
-# (only for remote access for troubleshooting, not needed for Pinokio)
-echo "🔄 Starting VNC server for remote access..."
-x11vnc -display :99 -forever -passwd $VNC_PWD &
-sleep 2
-echo "✅ VNC server is running (container port 5900)."
-
 # Start Pinokio 
 # (the switches for GPU and SHM are needed to the electron desktiopp app in the container, as the vitual display is not a real GPU)
 echo "🚀 Starting Pinokio (container port 42000)..."

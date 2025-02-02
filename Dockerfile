@@ -22,7 +22,7 @@ RUN apt install -y \
 RUN apt install -y \
     libgbm1 libasound2
 RUN apt install -y \
-    xvfb x11vnc tigervnc-standalone-server
+    xvfb
 RUN apt install -y \
     dbus dbus-x11
 RUN rm -rf /var/lib/apt/lists/*
