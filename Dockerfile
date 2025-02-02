@@ -1,8 +1,13 @@
-# Use an Ubuntu-based CUDA image
-#FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04
-FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+# Some apps require nvcc (NVIDIA Cuda Compiler). The runtime container from NVIDIA does not include it. 
+# Hence we use the development container which includes nvcc.
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+#FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
 
-# Set environment variables
+# Set configuration variables
+ENV VNC_PWD=pinokio
+
+
+# Set system variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
@@ -37,7 +42,6 @@ RUN apt install -y /tmp/pinokio.deb && rm /tmp/pinokio.deb
 
 # Expose VNC port
 EXPOSE 5900
-EXPOSE 7860
 EXPOSE 42000
 
 RUN mkdir /app
