@@ -27,6 +27,12 @@ sleep 2
 export DISPLAY=:99
 echo "✅ Xvfb is running (DISPLAY=:99)."
 
+# Set up the CUDA environment
+# (needed by some applications, as they require the CUDA libraries)
+export CUDA_HOME=/usr/local/cuda
+export PATH="$CUDA_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDA_HOME/lib64:$LD_LIBRARY_PATH"
+
 # Start Pinokio 
 # (the switches for GPU and SHM are needed to the electron desktop app in the container, as the vitual display is not a real GPU)
 echo "🚀 Starting Pinokio (container port 42000)..."
