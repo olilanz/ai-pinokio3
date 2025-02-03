@@ -20,6 +20,7 @@ RUN apt update \
         libgbm1 libasound2 \
         xvfb \
         dbus dbus-x11 \
+        libcudnn8 \
     && rm -rf /var/lib/apt/lists/*
 
 # Folder structures and assets
