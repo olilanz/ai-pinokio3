@@ -33,16 +33,16 @@ RUN apt update \
         libcudnn8 \
     && rm -rf /var/lib/apt/lists/*
 
+# Download and install the Pinokio .deb package
+RUN wget -O pinokio.deb $PINOKIO_DOWNLOAD_URL
+RUN apt install -y ./pinokio.deb && rm pinokio.deb
+
 # Folder structures and assets
 RUN mkdir /app
 WORKDIR /app
 COPY config.json config.json
 COPY startup.sh startup.sh
 RUN chmod +x startup.sh
-
-# Download and install the Pinokio .deb package
-RUN wget -O pinokio.deb $PINOKIO_DOWNLOAD_URL
-RUN apt install -y ./pinokio.deb && rm pinokio.deb
 
 EXPOSE 42000
 
