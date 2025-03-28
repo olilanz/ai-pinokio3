@@ -20,7 +20,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
 
 # Software configuration
-ENV PINOKIO_DOWNLOAD_URL=https://github.com/pinokiocomputer/pinokio/releases/download/3.6.0/Pinokio_3.6.0_amd64.deb
+ENV PINOKIO_DOWNLOAD_URL=https://github.com/pinokiocomputer/pinokio/releases/download/3.6.23/Pinokio_3.6.23_amd64.deb
 
 # Install system dependencies required by Pinokio and VNC
 RUN apt update \

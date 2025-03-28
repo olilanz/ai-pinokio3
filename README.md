@@ -1,34 +1,38 @@
-# Pinokio 3.6 - AI Market Place for runing AI models in your own privacy
+# Pinokio 3.6 - AI Market Place for Running AI Models in Your Own Privacy
 
-Pinokio [https://pinokio.computer] is the go-to app for downloading and installing the latest AI applications, locally on your own hardware. This app is a containerized version of Pinokio, which lets you run everything inside a container - no installation required. 
+Pinokio [https://pinokio.computer] is the go-to app for downloading and installing the latest AI applications locally on your own hardware. This app is a containerized version of Pinokio, which lets you run everything inside a container - no installation required.
 
-This might seem weird at first, as Pinokio originally was designed as a desktop app. But it you - like me - have a Linux server with an expensive GPU, where ther is no interactive login, this might be an interesting option. Or if you don't have an expensive GPU, but want to try AI apps out on a rented GPU in the cloud, without having to deal with VM configuration, this might might be interesting again. Or if you relly want to try out one of the unverified community scripts with the latest innovation, but you are not sure what this is going to do to your computer... the container provides an additional layer of isolation to the app.
+This might seem unusual at first, as Pinokio was originally designed as a desktop app. However, if you have a Linux server with an expensive GPU, where there is no interactive login, this might be an interesting option. Alternatively, if you don't have an expensive GPU but want to try AI apps on a rented GPU in the cloud without dealing with VM configuration, this could also be appealing. Additionally, if you want to experiment with unverified community scripts with the latest innovations but are unsure of their effects on your computer, the container provides an additional layer of isolation.
 
-With Pinokio, downloading and installing AI apps is super easy. Pinokio will take care of that. And with keeping everything in the container, your server and your workstation will stay clean. 
+With Pinokio, downloading and installing AI apps is straightforward. Pinokio will handle that for you, keeping everything in the container to maintain a clean server and workstation.
 
-NOTE: The container does only contain Pinokio. It does not contain any AI software or model. Once you open Pinokio, you will be able to browse the Pinokio catalog, and let Pinokio download required artifacts into the container.
+**NOTE**: The container only contains Pinokio and does not include any AI software or models. Once you open Pinokio, you can browse the Pinokio catalog and let it download the required artifacts into the container.
 
-NOTE: All downloads are stored in the /workspace folder. If you want to avoid downloading the same files over and over again, you can map that folder as a volume to your host file system. I would advise that as you will accumulate literally 100's of gigabytes of data.
+**NOTE**: All downloads are stored in the `/workspace` folder. To avoid downloading the same files repeatedly, you can map that folder as a volume to your host file system. This is advisable as you will accumulate hundreds of gigabytes of data.
 
-NOTE: Pinokio itself is listening on port 42000. But installed apps mey listen on other ports. If you want to keep things simple, you can expose the container on the host network directly. This lets you start new apps directly without the hassle of reconfiguring port maps.
+**NOTE**: Pinokio listens on port 42000, but installed apps may listen on other ports. To simplify things, you can expose the container on the host network directly, allowing you to start new apps without reconfiguring port maps.
 
-NOTE: Some apps require specific hardware, such a sound card or microphone. This will of course be a bit weird, if Pinokio runs in a server in a data centre, while you are accesing Pinokio via the web browser. Naturally, this will put some limitations on apps that have server-side hardware-requirements, or render them directly unusable. That, of course, is a limitation of running Pinokio in this particular way.
+**NOTE**: Some apps require specific hardware, such as a sound card or microphone. This may be problematic if Pinokio runs on a server in a data center while you access it via a web browser. This limitation affects apps with server-side hardware requirements, potentially rendering them unusable.
 
-For an overvion on how Pinokio works, and what AI apps can be installed, please refer to the official (Pinokio)[https://pinokio.computer] website.
+For an overview of how Pinokio works and what AI apps can be installed, please refer to the official [Pinokio](https://pinokio.computer) website.
 
-
-## Building the container
-
+## Building the Container
+To build the container, run:
+```bash
 docker build -t olilanz/ai-pinokio3 .
+```
 
-## Running the container
-
+## Running the Container
+To run the container, use:
+```bash
 docker run -it --rm --name ai-pinokio3 \
   --shm-size 24g --gpus all \
-    -v /mnt/cache/appdata/ai-pinokio3:/workspace \
-    -p 42000:42000   \
-    --network host \
-    olilanz/ai-pinokio3
+  -v /mnt/cache/appdata/ai-pinokio3:/workspace \
+  -p 42000:42000 \
+  --network host \
+  olilanz/ai-pinokio3
+```
 
-* https://github.com/pinokiocomputer/pinokio/issues/87
-* https://github.com/pinokiocomputer/pinokio/issues/238
+## Resources
+* [Pinokio GitHub Issues](https://github.com/pinokiocomputer/pinokio/issues/87)
+* [Pinokio GitHub Issues](https://github.com/pinokiocomputer/pinokio/issues/238)

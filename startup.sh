@@ -18,8 +18,8 @@ export DBUS_SESSION_BUS_ADDRESS
 echo "✅ Session D-Bus started: $DBUS_SESSION_BUS_ADDRESS"
 
 # Start X virtual framebuffer (needed by Pinokio)
-echo "🔄 Starting Xvfb virtual display..."
-Xvfb :99 -screen 0 1280x1024x24 &
+echo "🔄 Starting Xvfb virtual display so Electron has a place to render..."
+Xvfb :99 -screen 0 1280x1024x16 &
 sleep 2
 export DISPLAY=:99
 echo "✅ Xvfb is running (DISPLAY=:99)."
@@ -42,7 +42,8 @@ mkdir -p "${CONFIG_HOME}" /root/.config
 ln -snf "${CONFIG_HOME}" /root/.config/Pinokio 
 
 # Start Pinokio (Electron desktop app requires these switches)
-PINOKIO_ARGS="serve --port 42000 --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --headless"
+# PINOKIO_ARGS="serve --port 42000 --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --headless"
+PINOKIO_ARGS="serve --port 42000 --no-sandbox --disable-dev-shm-usage --headless"
 
 echo "🚀 Starting Pinokio (container port 42000)..."
 echo "exec pinokio ${PINOKIO_ARGS} 2>&1 | tee \"${CACHE_HOME}/output.log\""
